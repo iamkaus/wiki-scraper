@@ -15,6 +15,6 @@ def main():
     # Step 4: Save the processed data to CSV
     save_to_csv(raw_data, "<PROCESSED_CSV_DATA_PATH>") # replace with processed_csv_data path
 
-
-if __name__ == "__main__":
-    main()
+# Example usage -> only for test
+# if __name__ == "__main__":
+#     main()
