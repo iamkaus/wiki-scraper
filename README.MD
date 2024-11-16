@@ -32,7 +32,7 @@ Make sure you have the following installed:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/wikipedia-scraper.git
+   git clone https://github.com/iamkaus/wikipedia-scraper.git
    cd wikipedia-scraper
 2. **Set up python virtual environment:**
     ```bash
