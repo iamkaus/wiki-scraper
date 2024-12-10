@@ -19,5 +19,5 @@ __all__ = [
 
 # Metadata for the package
 __version__ = "1.0.0"
-__author__ = "Your Name"
+__author__ = "iamkaus"
 __description__ = "A package for scraping, processing, and storing Wikipedia data"
