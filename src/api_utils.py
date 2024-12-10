@@ -109,12 +109,3 @@ def wikipedia_scraper(title):
         print(f"An error occurred while writing to the file: {e}")
 
     return raw_data
-
-
-# Example usage:
-if __name__ == "__main__":
-    try:
-        result = wikipedia_scraper("Python_(programming_language)")
-        print("Scraped data:", result)
-    except Exception as e:
-        print(f"An error occurred: {e}")
