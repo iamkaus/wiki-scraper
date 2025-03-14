@@ -19,20 +19,23 @@ def wikipedia_scraper(title):
         raise ValueError("The title cannot be empty or None. Please provide a valid title.")
 
     # Fetch the Wikipedia page summary
-    raw_html = fetch_wikipedia_page(title)
+    response = fetch_wikipedia_page(title)
 
-    if not raw_html:
-        raise ValueError(f"No summary available for the title '{title}'.")
+    if isinstance(response, dict) and "summary" in response:
+        raw_html = response["summary"]
+    else:
+        raise ValueError(f"Failed to fetch data for title '{title}': {response}")
 
     # Parse HTML and extract text
     soup = BeautifulSoup(raw_html, 'html.parser')
+
     summary = soup.get_text(separator=' ', strip=True)
 
     # Create the structured data as a list of dictionaries
     raw_data = [{"Title": title, "Summary": summary}]
 
     # File path for raw data
-    raw_data_path = '<raw_data_path>' # replace with path where raw_data should dump in
+    raw_data_path = os.path.join(os.getcwd(), "wiki-scraper", "html_data.txt") # replace with path where raw_data should dump in
 
     # Ensure the raw data directory exists
     os.makedirs(os.path.dirname(raw_data_path), exist_ok=True)
@@ -50,7 +53,7 @@ def wikipedia_scraper(title):
                         raise ValueError("The raw data file does not contain a valid list.")
 
                     # Avoid duplicates
-                    if raw_data not in existing_data:
+                    if raw_data[0] not in existing_data:
                         existing_data.append(raw_data[0])
                         file.seek(0)
                         json.dump(existing_data, file, indent=4)
@@ -65,15 +68,8 @@ def wikipedia_scraper(title):
             with open(raw_data_path, 'w') as file:
                 json.dump([raw_data[0]], file, indent=4)
 
+        print(f"Raw data has been successfully saved to {raw_data_path}")
+        return raw_data
+
     except IOError as e:
         print(f"An error occurred while writing to the file: {e}")
-
-    return raw_data
-
-
-# Example Usage -> only for test
-if __name__ == "__main__":
-    try:
-        wikipedia_scraper("Python_(programming_language)")
-    except Exception as e:
-        print(f"An error occurred: {e}")

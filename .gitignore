@@ -34,3 +34,6 @@ data/processed_data/
 
 # Ignore the .env file (if you have any secret keys or environment variables)
 .env
+env
+*.venv
+src/wiki-scraper

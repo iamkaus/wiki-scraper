@@ -70,7 +70,7 @@ def process_data(raw_data_path, processed_data_path):
 
     # Save processed data to a file
     with open(processed_data_path, 'w') as file:
-        file.write("\n".join(processed_summaries))
+        file.write("\n".join(processed_summaries)) # wrap this within a try/catch for better error handling
 
 
 def truncate_summary(processed_data_path, output_path, max_length=500):
